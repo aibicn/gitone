@@ -1,40 +1,3 @@
-Table of Contents
-=================
-
-* [What is Matter?](#what-is-matter)
-* [Third Reality Matter Projects](#third-reality-matter-projects)
-* [Development Environment](#development-environment)
-   * [Recommended OS](#recommended-os)
-   * [Install Dependencies](#install-dependencies)
-   * [Download Code](#download-code)
-   * [Install Bouffalo Lab SDK](#install-bouffalo-lab-sdk)
-   * [Set Environment Variables](#set-environment-variables)
-   * [Compile BL602 ( main branch)](#compile-bl602--main-branch)
-   * [Compile BL706 ( main branch)](#compile-bl706--main-branch)
-   * [Compiled Results](#compiled-results)
-* [Burn Firmware](#burn-firmware)
-   * [Get Burning Tool](#get-burning-tool)
-   * [Burn BL602](#burn-bl602)
-   * [Burn BL706](#burn-bl706)
-   * [Firmware for Download](#firmware-for-download)
-   * [Hardware Scheme for Download](#hardware-scheme-for-download)
-* [Control the Night Light](#control-the-night-light)
-   * [Use iPhone and HomePod mini](#use-iphone-and-homepod-mini)
-      * [Prepare](#prepare)
-      * [Bind iPhone and HomePod](#bind-iphone-and-homepod)
-      * [Add a Night Light in Home](#add-a-night-light-in-home)
-      * [Reset Apple HomePod](#reset-apple-homepod)
-      * [Remove Accessories from Home](#remove-accessories-from-home)
-   * [Use Android Phone and Google Nest](#use-android-phone-and-google-nest)
-      * [Prepare](#prepare-1)
-      * [Set up Google Nest](#set-up-google-nest)
-      * [Add a Night Light in Home](#add-a-night-light-in-home-1)
-      * [Reset Google Nest](#reset-google-nest)
-   * [Use Amazon Echo and Alexa](#use-amazon-echo-and-alexa)
-   * [Factory Reset Night Light](#factory-reset-night-light)
-
-
-
 # What is Matter?
 
 Matter (formerly Project Connected Home over IP, or Project CHIP) is a new
@@ -78,7 +41,12 @@ Third Reality will pay attention to the progress of the Matter and upgrade with 
 synchronously, so that users can experience the latest version of Matter earlier. 
 Matter is as vibrant as the Amazon rainforest. Let's go ahead.
 
+
+
+# Hardware Scheme
 <img src="./README.assets/System_Block_Diagram.jpg">
+
+From this path: `"./nightlight_mt/docs_3r/hardware"`, you can download the hardware implementation schematic, refer to the scheme, and conduct in-depth research against the code.
 
 
 
@@ -176,11 +144,6 @@ or found under the tools directory of the project path.
 ## Firmware for Download
 
 From this path: `"./nightlight_mt/docs_3r/firmware"` (including the `bl602` and `bl706` subdirectories), you can download the compiled nightlight bin and the dependent firmware, and directly burn and test them without compiling them yourself.
-
-
-## Hardware Scheme for Download
-
-From this path: `"./nightlight_mt/docs_3r/hardware"`, you can download the hardware implementation schematic, refer to the scheme, and conduct in-depth research against the code.
 
 
 
