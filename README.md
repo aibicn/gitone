@@ -4,14 +4,23 @@ Table of Contents
 * [What is Matter?](#what-is-matter)
 * [Third Reality Matter Projects](#third-reality-matter-projects)
 * [Development Environment](#development-environment)
+
       * [Recommended OS](#recommended-os)
+
       * [Install Dependencies](#install-dependencies)
+
       * [Download Code](#download-code)
+
       * [Install Bouffalo Lab SDK](#install-bouffalo-lab-sdk)
+
       * [Set Environment Variables](#set-environment-variables)
+
       * [Compile BL602 ( main branch)](#compile-bl602--main-branch)
+
       * [Compile BL706 ( main branch)](#compile-bl706--main-branch)
+
       * [Compiled Results](#compiled-results)
+
 * [Burn Firmware](#burn-firmware)
       * [Get Burning Tool](#get-burning-tool)
       * [Burn BL602](#burn-bl602)
