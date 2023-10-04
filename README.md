@@ -1,10 +1,47 @@
+- [ThirdReality Relay Module](#thirdreality-relay-module)
+- [Hardware Scheme](#hardware-scheme)
+- [Development Environment](#development-environment)
+  - [Recommended OS](#recommended-os)
+  - [Install Dependencies](#install-dependencies)
+  - [Download Code](#download-code)
+  - [Install Bouffalo Lab SDK](#install-bouffalo-lab-sdk)
+  - [Set Environment Variables](#set-environment-variables)
+  - [Compile Relay Code (main branch)](#compile-relay-code-main-branch)
+  - [Compiled Results](#compiled-results)
+- [Burn Firmware](#burn-firmware)
+  - [Get Burning Tool](#get-burning-tool)
+  - [Connect the relay module to a USB to UART board](#connect-the-relay-module-to-a-usb-to-uart-board)
+  - [Connect UART board to computer USB port](#connect-uart-board-to-computer-usb-port)
+  - [Burning Process](#burning-process)
+  - [Get QR code](#get-qr-code)
+- [Control Relay](#control-relay)
+  - [Plug into the smart socket ESP-01S Relay base](#plug-into-the-smart-socket-esp-01s-relay-base)
+  - [Example of Controlling the Relay with an APP](#example-of-controlling-the-relay-with-an-app)
+- [More references for relay control](#more-references-for-relay-control)
+  - [Use iPhone and HomePod mini](#use-iphone-and-homepod-mini)
+    - [Prepare](#prepare)
+    - [Reset Apple HomePod](#reset-apple-homepod)
+    - [Bind iPhone and HomePod](#bind-iphone-and-homepod)
+    - [Add a Relay Module in Home](#add-a-relay-module-in-home)
+    - [Remove Accessories from Apple Home](#remove-accessories-from-apple-home)
+  - [Use Android Phone and Google Nest](#use-android-phone-and-google-nest)
+    - [Reset Google Nest](#reset-google-nest)
+    - [Set up Google Nest](#set-up-google-nest)
+    - [Add a Relay Module in Google Home](#add-a-relay-module-in-google-home)
+  - [Use Android Phone and Echo V4](#use-android-phone-and-echo-v4)
+- [OTA upgrade with ThirdReality App](#ota-upgrade-with-thirdreality-app)
+    - [Install ThirdReality App](#install-thirdreality-app)
+    - [Control the Relay Module](#control-the-relay-module)
+    - [OTA upgrade](#ota-upgrade)
+- [Factory Reset](#factory-reset)
+
 # ThirdReality Relay Module
 
 The relay module supports Matter protocols, is suitable for power switch control scenarios in various circuits. You can use any app that supports Matter, such as Amazon Alexa, Apple Home, Google Home, SmartThings , ThirdReality app or Matter Chip-Tool to communicate with the Module. Simultaneously utilizing various intelligent speakers, such as HomePod/mini, Google Nest/Display, Amazon Echo/Dot,  you can also easily control the Relay through voice interaction.
 
 The relay module has passed CSA Matter 1.1 certification，RF and other hardware indicators certification, ensuring its safety. It is small enough in size to easily embed into your product, allowing it to immediately integrate into the Matter ecosystem. The standard OTA upgrade of Matter can continuously ensure that your relay firmware updates are synchronized with Matter upgrades.
 
-A single module supports up to 3 independent relay controls, and this configuration on the module can be changed through four combinations of two resistors. Then, the pre burned firmware will recognize the hardware changes and complete the dynamic configuration.
+A single module supports up to 3 independent relay controls, and this configuration on the module can be changed through four combinations of two resistors. Then, the pre-burned firmware will recognize the hardware changes and complete the dynamic configuration.
 
 
 
