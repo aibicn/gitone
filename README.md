@@ -1,66 +1,31 @@
-<!--ts-->
+# ThirdReality Relay Module
 
-<!--te-->
-# What is Matter?
+The relay module supports Matter protocols, is suitable for power switch control scenarios in various circuits. You can use any app that supports Matter, such as Amazon Alexa, Apple Home, Google Home, SmartThings , ThirdReality app or Matter Chip-Tool to communicate with the Module. Simultaneously utilizing various intelligent speakers, such as HomePod/mini, Google Nest/Display, Amazon Echo/Dot,  you can also easily control the Relay through voice interaction.
 
-Matter (formerly Project Connected Home over IP, or Project CHIP) is a new
-Working Group within the Connectivity Standards Alliance (CSA, formerly Zigbee
-Alliance). This Working Group plans to develop and promote the adoption of a
-new, royalty-free connectivity standard to increase compatibility among smart
-home products, with security as a fundamental design tenet.
+The relay module has passed CSA Matter 1.1 certification，RF and other hardware indicators certification, ensuring its safety. It is small enough in size to easily embed into your product, allowing it to immediately integrate into the Matter ecosystem. The standard OTA upgrade of Matter can continuously ensure that your relay firmware updates are synchronized with Matter upgrades.
 
-The goal of the Matter project is to simplify development for manufacturers and
-increase compatibility for consumers. The project is built around a shared
-belief that smart home devices should be secure, reliable, and seamless to use.
-By building upon Internet Protocol (IP), the project aims to enable
-communication across smart home devices, mobile apps, and cloud services and to
-define a specific set of IP-based networking technologies for device
-certification.
-
-this is a newline for test.
-this is a newline for test2.
-this is a newline for test3.
-this is a newline for test4.
-
-
-
-# Third Reality Matter Projects
-
-Third Reality  has actively participated in Matter. By the end of 2022, it has just 
-developed two night light products, providing open source code and hardware for 
-interested developers to download code, compile and burn firmware to the light 
-for testing. Users can voice control lights (switch lights, adjust colors, and brightness) 
-on HomePod mini, HomePod, Google Nest, Amazon Echo and other speakers that 
-support Matter. Needless to say, users can also control these lights through their 
-mobile phones.
-
-These two lamps have PIR motion sensor and light sensor inside. With the help of 
-these sensors, developers can directly develop practical night light lighting products. 
-Third Reality  will open source all relevant code at an appropriate time to facilitate 
-developers. 
-
-Third Reality keeps updating the software and hardware of the existing Matter 
-products, and provides users with more reference examples (in fact, it is a product with 
-complete functions, and it will be easier for users to modify the code on this basis, 
-and can achieve full customization functions).  At the same time, develops new products 
-that support Matter standard.
-
-Third Reality will pay attention to the progress of the Matter and upgrade with it 
-synchronously, so that users can experience the latest version of Matter earlier. 
-Matter is as vibrant as the Amazon rainforest. Let's go ahead.
+A single module supports up to 3 independent relay controls, and this configuration on the module can be changed through four combinations of two resistors. Then, the pre burned firmware will recognize the hardware changes and complete the dynamic configuration.
 
 
 
 # Hardware Scheme
-<img src="./README.assets/System_Block_Diagram.jpg">
 
-From this path: `"./nightlight_mt/docs_3r/hardware"`, you can download the hardware implementation schematic, refer to the scheme, and conduct in-depth research against the code.
+![image-20231004120402654](README.assets/image-20231004120402654.png)
+
+
+
+![image-20231004120634528](README.assets/image-20231004120634528.png)
+
+**Hardware Configuration Options**
+
+- *both R12 and R14 welded, only Relay 1 installed*
+- *only  R12  welded, Relay 1 & 2 installed*
+- *only  R14  welded, Relay 1 & 3 installed*
+- *neither R12 nor R14 welded, Relay 1 & 2 & 3 installed*
 
 
 
 # Development Environment
-
-
 
 ## Recommended OS
 
@@ -76,9 +41,9 @@ From this path: `"./nightlight_mt/docs_3r/hardware"`, you can download the hardw
 
 ## Download Code
 
-`git clone https://github.com/thirdreality/nightlight_mt.git`
+`git clone https://github.com/thirdreality/relay_mt.git`
 
-`cd nightlight_mt`
+`cd relay_mt`
 
 `git submodule update --init --recursive`
 
@@ -97,17 +62,15 @@ If this script says the environment is out of date, it can be updated by running
 
 `export BOUFFALOLAB_SDK_ROOT=/opt/bouffalolab_sdk`
 
-## Compile BL602 ( main branch)
+## Compile Relay Code (main branch)
 
-`./scripts/build/build_examples.py --target bouffalolab-bl602-iot-matter-v1-light build`
-
-## Compile BL706 ( main branch)
-
-`./scripts/examples/gn_bouffalolab_example.sh lighting-app out/bouffalolab-bl706-night-light-light BL706-NIGHT-LIGHT module_type=BL706C-22 enable_cdc_module=true`
+`./scripts/build/build_examples.py --target thirdreality-relay-light build`
 
 ## Compiled Results
 
-at ./out directory
+at ./out/thirdreality-relay-light/ directory
+
+You can find the 'thirdreality-relay. bin' file there, and then you can burn the bin file to the device.
 
 
 
@@ -119,43 +82,109 @@ The burning tool "**Bouffalo Lab Dev Cube**" can be downloaded from the bouffalo
 
 https://dev.bouffalolab.com/download
 
-or found under the tools directory of the project path.
-
-## Burn BL602
-
-1. press and hold the key on the Night Light’s pinhole
-2. press the reset button on the debugging board
-3. release the Night Light’s key to enter the burning mode
-4. run BLDevCube.exe ( at burning tool directory ) on Windows OS
-5. Set parameters as shown in the following screenshot (get partition table, dts and boot2 from the burning tool, firmware from the build)
-6. click Create & Download button
-7. wait until the progress bar is 100%, which means the burning is completed
-
-<img src="./README.assets/image-20221231132154337.png">
 
 
-## Burn BL706
+## Connect the relay module to a USB to UART board
 
-1. prepare a USB cable with one female end and one male end
-2. connect the Night Light with a female USB port
-3. press and hold the key on the Night Light’s pinhole
-4. connect the male USB port to the USB interface of the computer
-5. then release the Night Light’s key to enter the burning mode
-6. run BLDevCube.exe ( at burning tool directory ) on Windows OS 
-7. Set parameters as shown in the following screenshot (get partition table and firmware from the build, dts from the burning tool)
-8. click Create & Download button
-9. wait until the progress bar is 100%, which means the burning is completed
+| PIN (relay module) | PIN (USB to UART board) |
+| ------------------ | ----------------------- |
+| V                  | VCC (3.3V)              |
+| G                  | GND                     |
+| RX                 | TXD                     |
+| TX                 | RXD                     |
 
-<img src="./README.assets/image-20221231151940933.png">
-                          
+The hardware wiring can refer to the following diagram
 
-## Firmware for Download
-
-From this path: `"./nightlight_mt/docs_3r/firmware"` (including the `bl602` and `bl706` subdirectories), you can download the compiled nightlight bin and the dependent firmware, and directly burn and test them without compiling them yourself.
+<img src="README.assets/image-20230620121811312.png" alt="image-20230620121811312" style="zoom:80%;" />
 
 
 
-# Control the Night Light
+## Connect UART board to computer USB port
+
+Set serial port parameters as the following
+
+<img src="README.assets/image-20230620121032706.png" alt="image-20230620121032706" style="zoom: 80%;" />
+
+***Pay attention to serial port baudrate 2000000***
+
+
+
+## Burning Process
+
+1. Connect the relay module GPIO8(Boot)  to 3.3V pin on the UART board,  power on relay
+
+2. Copy the previously compiled bin file "thirdreality-relay. bin"
+
+3. run BLDevCube.exe ( at burning tool directory ) on Windows OS
+
+4. Set parameters as shown in the following screenshot 
+
+   ```
+   You can get partition table file from this repository, relay_mt/tools-3r/firmware/bl602/,
+   
+   dts and boot2 from the burning tool,
+   
+   firmware from the build.
+   ```
+
+   
+
+5. click Create & Download button
+
+6. wait until the progress bar is 100%, which means the burning is completed
+
+   
+
+![image-20231004160924115](README.assets/image-20231004160924115.png)
+
+
+
+## Get QR code
+
+After burning reset relay, from the uart log, copy URL similar to the following:
+https://project-chip.github.io/connectedhomeip/qrcode.html?data=MT%3A-24J0-C714W80648G00
+
+Open the URL above with a browser, and normally, there will be a QR code on the screen
+
+<img src="README.assets/image-20230620121250840.png" alt="image-20230620121250840" style="zoom: 80%;" />
+
+
+
+# Control Relay
+
+
+
+## Plug into the smart socket ESP-01S Relay base
+
+The Relay module can be directly plugged into the ESP-01S relay smart socket, which is powered by 5V DC, then  you can experience pin to pin compatibility and immediately work.
+
+<img src="README.assets/image-20230621174116549.png" alt="image-20230621174116549" style="zoom:80%;" /><img src="README.assets/image-20230621174221425.png" alt="image-20230621174221425" style="zoom:96%;" />
+
+
+
+
+
+## Example of Controlling the Relay with an APP
+
+Taking an Apple phone as an example, you can do as follows
+
+1. Open the mobile phone Home App, click the "+" in the upper right corner, and select "Add accessories" from the pop-up menu.
+
+2. Scan the QR code above on the pop-up interface, and add it according to the prompts. You can customize the location and name of the accessories at Home.
+
+3. Wait for the configuration to be completed, and there will be a new relay device in Home.
+
+4. You can open the accessories interface to control the relay module on iPhone, or control the relay through voice interaction, such as "turn on BB2".
+
+   ![image-20230621174303917](README.assets/image-20230621174303917.png)
+
+   
+
+
+
+
+
+# More references for relay control
 
 
 
@@ -163,55 +192,61 @@ From this path: `"./nightlight_mt/docs_3r/firmware"` (including the `bl602` and 
 
 ### Prepare
 
-Upgrade the iPhone OS to 16.1.2 or higher
+Upgrade the iPhone OS to 16.5.1 or higher
 
 Confirm that the App Home is installed on your phone
 
-Upgrade HomePod to version 16.1 or above
+Upgrade HomePod to version 16.5.1 or above
+
+### Reset Apple HomePod
+
+Power on the loudspeaker after power off for 10s
+
+Wait for 5s after power on, you may press the center at the top of the speaker with your index finger
+
+Release after you hear 3 beeps, according to the speaker prompts, and there will be a chime
 
 
 ### Bind iPhone and HomePod
 
-1. Plug the HomePod mini or HomePod into the power supply. Wait for the prompt to sound and the indicator on the HomePod mini or the top of the HomePod starts flashing white.
+1. Plug the HomePod mini or HomePod into the power supply. Wait for the prompt sound and the indicator on the HomePod mini or the top of the HomePod starts flashing white.
 2. Unlock your iPhone or iPad and place it close to the HomePod mini or HomePod. When "Settings" appears on the device screen, tap this button.
 3. When the system prompts you to place the HomePod mini or HomePod in the center of the iPhone or iPad viewfinder, follow the prompts to complete pairing. If you can't use the camera, please click "Enter password manually", and Siri will respond with a four digit password. Please enter this password into your device.
 4. Follow the onscreen instructions to select your settings. After setting up, you can also customize and manage all the HomePod mini or HomePod settings in the Home app.
 5. Wait for HomePod mini or HomePod to finish setting, then tap Finish.
 
 
-### Add a Night Light in Home
 
-1. BL602 or BL706 light is connected to the computer
+### Add a Relay Module in Home
 
-2. UART baud rate is set to 2000000, and power on again
+1. Power on the relay  ( If the following steps are not successful and exceed 10 minutes, power up the Relay again ).
 
-3. From the uart log, copy URL similar to the following:
+2. Open the URL (as a developer you may copy it from uart log) with a browser, and normally, there will be a QR code on the screen.
 
-    `https://project-chip.github.io/connectedhomeip/qrcode.html?data=MT%3A6FCJ142C00KA0648G00`
+3. Open the mobile phone Apple Home App, click the "+" in the upper right corner, and select "Add accessories" from the pop-up menu.
 
-    <u>*Note: For BL706 Night Light you can print the URL multiple times by short pressing the key*</u>
+4. Scan the QR code, which either can be opened with a browser(see step 2)  or has been printed and pasted on the shielding cover of the module.
 
-4. Open the URL above with a browser, and normally, there will be a QR code on the screen
+4. Add the relay device according to the prompts. You can customize the location, name or icon of the accessories in Home App.
 
-5. Open the mobile phone Home App, click the "+" in the upper right corner, and select "Add accessories" from the pop-up menu
+    <img src="README.assets/image-20230629153155731.png" alt="image-20230629153155731" style="zoom: 124%;" />
 
-6. Scan the QR code of the night light on the pop-up interface, and add it according to the prompts. You can customize the location and name of the accessories at Home
+    *Different display icons can be selected*
 
-7. Wait for the configuration to be completed, and there will be a new night light in Home
+    
 
-8. You can open the accessories interface to control the night light through touch, or control the light through voice interaction, such as "turn on all lights"
+5. Wait for the configuration to be completed, and there will be a new device in the Home.
 
+6. You can operate in the Home App to control the relay on/off through touch, or control it through voice interaction, such as "turn on XXX (the relay device name)".
 
-### Reset Apple HomePod
+    
 
-Power on the loudspeaker after power off for 10s
+    *If the relay is turned on, the LED green light will be on; If the relay is disconnected, the LED light will go out.*
 
-Wait for 5s after power on, press the middle position of the speaker with your index finger
-
-Release after you hear 3 beeps, according to the speaker prompts, and there will be a chime
+    
 
 
-### Remove Accessories from Home
+### Remove Accessories from Apple Home
 
 Open the Home App and enter "My Home"
 
@@ -225,59 +260,68 @@ For HomePod, select "Restore HomePod..." and then "Remove Accessories"
 
 ## Use Android Phone and Google Nest
 
-### Prepare
-
-A  Google Nest (speaker or display)
-
-Latest version of the Google Home app
-
-A Google Account
-
-A mobile phone or tablet that:
-
-*Has Android 8.0 or later*
-
-*Works with 2.4 GHz and 5 GHz Wi-Fi network (a WPA-2 Enterprise network won't work)*
-
-*Has Bluetooth turned on*
-
-*An Internet connection and secure wireless network*
-
-### Set up Google Nest
-
-Open the Google Home app (upgrade to the latest version first) on your mobile phone
-
-Recommended to set Google Nest as the first device
-
-Tap to select Devices enter the settings screen
-
-Tap the + Add icon, Set up a device (set up a new device or add an existing device or service to your home)
-
-Choose a home (you will be able to control the devices and services in this home) , then tap Next, Enter Looking for devices...
-
-or Choose  Add another home, then tap Next,  enter a Home nickname and address
-
-Wait a moment till you see " Nest Hub found" result text, then Scan the QR code on the Google Nest screen
-
-Tab Connect when "Connect to device"  box pops up
-
-Complete the setting of Google Nest
-
-### Add a Night Light in Home
-
-Add a night light in Google Home, just like adding a night light in Apple Home above.
-
 ### Reset Google Nest
 
 If the device has been used before, you can factory reset it as follows:
 
-Press and hold V+V - key simultaneously for 10 seconds
+On the back of the Google Nest Display, press Volume Up and Volume Down simultaneously for 10 seconds.
+
+*(when pressing and holding, a message should appear on the screen telling you about the reset)*
+
+If you are using Google Nest Mini (first generation), you can long press and hold the Reset button at the bottom.
+
+For more details on other Nest speakers, you can refer to the factory instructions for operation.
 
 
 
-## Use Amazon Echo and Alexa
+### Set up Google Nest
 
-Matter-enabled Amazon Echo devices have built-in software to connect and control Matter smart home devices seamlessly. After a customer sets up an Echo, they can connect their devices by saying, "Alexa, discover my devices", or if you like, by adding the device in the Alexa app as follows: 
+Prepare a  Google Nest (speaker or display)
+
+Open the Google Home App (upgrade to the latest version first) on your mobile phone
+
+Recommended to set Google Nest as the first device
+
+Tap "Device" on the bottom menu bar
+
+Tap the “+ Add device” icon, Set up a device (set up a new device or add an existing device or service to your home)
+
+Choose a home (you will be able to control the devices and services in this home) , then tap Next, Enter Looking for devices.. or Choose Add another home, then tap Next, enter a Home nickname and address
+
+Wait a moment till you see " Nest Hub found" result text, then Scan the QR code on the Google Nest screen
+
+Configure the device as required until “XXX display is ready “ is displayed
+
+*(XXX is the name of the room where the device is set earlier)*
+
+Complete the setting of Google Nest
+
+
+
+
+### Add a Relay Module in Google Home
+
+Similar to adding Google Nest above, you can add a relay modulet in Google Home as follows:
+
+Tap "Device" on the bottom menu bar
+
+Tap the + Add icon, Set up a device (set up a new device or add an existing device or service to your home)
+
+Choose "New device" item, Choose a home on next screen, then tap Next, Enter Looking for devices...
+
+on next screen, What are you setting up?
+
+select and tap Matter-enabled device, then enter next screen, Scan Matter QR code
+
+Connect this device to your Google Account, tap "I agree" On the bottom right screen, then Connecting device to Google Home...
+
+Wait a moment when you see "Device connected", then tap Done, in your home you can find a new device, you can change its name in the settings (tap Gear icon in the upper right corner)
+
+
+
+## Use Android Phone and Echo V4
+
+Matter-enabled Amazon Echo devices have built-in software to connect and control Matter smart home devices seamlessly. After a customer sets up an Echo, you can connect their devices by saying, "Alexa, discover my devices", or if you like, by adding the device in the Alexa app as follows: 
 
 
 1. Install Amazon Alexa app on Android mobile phone
@@ -308,15 +352,50 @@ Matter-enabled Amazon Echo devices have built-in software to connect and control
 
 9. "Device found and connected", tap "Done"
 
-10. Enter the LIGHTS screen, you can control the lights added above, or voice control lights
+10.  You can control the relay module added above, or voice control lights
 
-    (Currently, it is recommended to use alexa control BL602)
+    
+
+# OTA upgrade with ThirdReality App
+
+### Install ThirdReality App
+
+(url to download)
+
+Prepare an Android 8.0 or higher phone to install ThirdReality App - app-release.apk
 
 
-## Factory Reset Night Light
 
-Long press the key for about 7s, then release the key
+### Control the Relay Module
 
-During the process, the light first turns on and then off
+Using the App to add a device, click on the + icon in the upper right corner of the screen
 
-Until the yellow light comes on, indicating that factory reset OK
+*(If first time you use the App, click Allow permission)*
+
+Scan the QR code of the relay module and add it to the App
+
+
+
+<img src="README.assets/image-20230629123329883.png" alt="image-20230629123329883" style="zoom:100%;" /><img src="README.assets/image-20230629140200338.png" alt="image-20230629140200338" style="zoom:72%;" />
+
+
+
+### OTA upgrade
+
+Click the Device icon, open next screen
+
+If you see "There is a new version available to update",  Click Download and Install to launch OTA upgrade
+
+
+
+<img src="README.assets/image-20230629141110566.png" alt="image-20230629141110566" style="zoom: 80%;" /><img src="README.assets/image-20230629142350837.png" alt="image-20230629142350837" style="zoom: 82%;" />
+
+
+
+
+# Factory Reset
+
+1. Quickly switch and power on 7 times, with an interval of no more than 4 seconds, and then the module will Factory Reset.
+2. During the process the light will go out, and then the brighter red light will light up for half a second, indicating that factory reset start.
+3. Afterwards, the module will automatically start.
+4. If the relay was previously connected to a WiFi, the blue light will remain on after Factory Reset; Otherwise, the blue light will be blinking at one second intervals.
